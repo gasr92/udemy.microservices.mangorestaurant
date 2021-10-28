@@ -11,6 +11,25 @@ SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultScheme = "Cookies";
+    opt.DefaultChallengeScheme = "oidc"; // openid connect
+})
+    .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+    .AddOpenIdConnect("oidc", opt =>
+    {
+        opt.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
+        opt.GetClaimsFromUserInfoEndpoint = true;
+        opt.ClientId = "mango";
+        opt.ClientSecret = "secret";
+        opt.ResponseType = "code";
+        opt.TokenValidationParameters.NameClaimType = "name";
+        opt.TokenValidationParameters.RoleClaimType = "role";
+        opt.Scope.Add("mango");
+        opt.SaveTokens = true;
+    });
+
 
 var app = builder.Build();
 
@@ -27,6 +46,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
