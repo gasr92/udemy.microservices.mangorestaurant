@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Duende.IdentityServer.Services;
+using System.Reflection;
 
 namespace IdentityServerHost.Quickstart.UI
 {
