@@ -34,7 +34,7 @@ namespace Mango.Web.Services
             });
         }
 
-        public async Task<T> GetAllProductByIDAsync<T>(int id, string token)
+        public async Task<T> GetProductByIDAsync<T>(int id, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {

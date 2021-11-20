@@ -55,7 +55,7 @@ namespace Mango.Web.Controllers
         public async Task<IActionResult> ProductEdit(int productId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetAllProductByIDAsync<ResponseDto>(productId, accessToken);
+            var response = await _productService.GetProductByIDAsync<ResponseDto>(productId, accessToken);
 
             if (response != null && response.IsSuccess)
             {
@@ -87,7 +87,7 @@ namespace Mango.Web.Controllers
         public async Task<IActionResult> ProductDelete(int productId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetAllProductByIDAsync<ResponseDto>(productId, accessToken);
+            var response = await _productService.GetProductByIDAsync<ResponseDto>(productId, accessToken);
 
             if (response != null && response.IsSuccess)
             {

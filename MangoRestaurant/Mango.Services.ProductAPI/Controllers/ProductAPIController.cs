@@ -18,7 +18,7 @@ namespace Mango.Services.ProductAPI.Controllers
             _productRepository = productRepository;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -38,7 +38,7 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpGet]
+        //[HttpGet]
         [Route("{id:int}")]
         public async Task<object> Get(int id)
         {
